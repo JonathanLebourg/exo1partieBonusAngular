@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Exercice 1 - partie Bonus - Angular</title>
+</head>
+<body >
+<div class="container">
+    <h1>Exercice 1 de la partie Bonus d'Angular</h1>
+    <p>Faire un formulaire de saisie d'adresse e-mail. Si l'adresse comporte le symbole <b>@</b>,
+    </br>alors une div verte apparait.
+  </br>S'il n'est pas là, une div rouge apparaît pour avertir l'utilisateur que sa saisie est incorrecte.</p>
+</div>
+
+<div class="col-lg-6" ng-app="ngpatternApp" ng-controller="ngpatternCtrl">
+  <form name="personForm" novalidate ng-submit="personForm.$valid &&sendForm()">
+    Email:<input type="text" name="email" ng-model="txtmail" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required />
+    <div style="color:white ; background-color:red" ng-show="personForm.email.$error.required"> Required! </div>
+    <div style="color:white ; background-color:green" ng-show="personForm.email.$valid"> Mail valide </div>
+    <div style="color:white ; background-color:red" ng-show="personForm.email.$dirty&&personForm.email.$error.pattern">Entrez un mail valide</div>
+  </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+<script type="text/javascript">
+  var app = angular.module('ngpatternApp', []);
+  app.controller('ngpatternCtrl', function ($scope) {
+    $scope.sendForm = function () {
+    $scope.msg = "Mail validé";
+    };
+  });
+</script>
+</body>
+</html>
